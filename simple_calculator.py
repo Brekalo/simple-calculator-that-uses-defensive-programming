@@ -1,5 +1,12 @@
 import os
 
+
+# using the 'map' to unpack the equation list into 3 separate variables (firstNumber, operator, secondNumber) instead of indexing each element separately
+# added a 'finally' block to 'loadEquationsFromFile' and 'simpleCalculatorInteractive', 
+# but finally block in 'performArithmeticOperation' it is not necessary because there no resources to be open that need to be closed
+
+
+
 def performArithmeticOperation(firstNumber, secondNumber, operator):
     try:
         if operator == "+":
@@ -10,13 +17,13 @@ def performArithmeticOperation(firstNumber, secondNumber, operator):
             return firstNumber * secondNumber
         elif operator == "/":
             if secondNumber == 0:
-                raise ZeroDivisionError(
-                    "Incorrect entry! Cannot be divided by zero.\n")
+                raise ZeroDivisionError("Cannot divide by zero./n")
             return firstNumber / secondNumber
         else:
             raise ValueError("Invalid operator!")
     except Exception as ex:
         return f"Error: {ex}"
+
 
 
 def loadEquationsFromFile(filePath):
@@ -25,22 +32,19 @@ def loadEquationsFromFile(filePath):
         with open(filePath, "r") as my_file:
             for line in my_file:
                 equation = line.strip().split()
-                # print(equation)
-                firstNumber = int(equation[0])
-                print(firstNumber)
-                secondNumber = int(equation[2])
-                print(secondNumber)
-                operator = equation[1]
+                firstNumber, operator, secondNumber = map(str, equation)
                 try:
-                    result = performArithmeticOperation(firstNumber, secondNumber, operator)
-                    formattedEquations.append(
-                        f"{firstNumber} {operator} {secondNumber} = {result}")
+                    result = performArithmeticOperation(int(firstNumber), int(secondNumber), operator)
+                    formattedEquations.append(f"{firstNumber} {operator} {secondNumber} = {result}")
                 except Exception as ex:
-                    formattedEquations.append(
-                        f"{firstNumber} {operator} {secondNumber} = Error ({ex})")
-            return formattedEquations
+                    formattedEquations.append(f"{firstNumber} {operator} {secondNumber} = Error ({ex})")
+        return formattedEquations
     except FileNotFoundError:
         print("File not found!")
+        return []
+    finally:
+        print("Reading from file is complete.")
+        
 
 
 def simpleCalculatorInteractive():
@@ -58,7 +62,7 @@ def simpleCalculatorInteractive():
                 with open('equations.txt', "a") as my_file:
                     my_file.write(
                         f"{firstNumber} {operator} {secondNumber} = {result}\n")
-                    print("File created and calculations written to the file.\n")
+                    print("File created and calculations written to the file.")
             elif userOption == "2":
                 filePath = input("Please enter the file name:\n > ")
                 equations = loadEquationsFromFile(filePath)
@@ -72,7 +76,11 @@ def simpleCalculatorInteractive():
             print(f"Error: {zde}")
         except Exception as ex:
             print(f"Unexpected error: {ex}")
+        finally:
+            print("The operation is complete.\n")
 
 
+# this checks whether the script is being executed as the 'main' code, and calls the 'simpleCalculatorInteractive' to start the main program loop
 if __name__ == "__main__":
     simpleCalculatorInteractive()
+    
