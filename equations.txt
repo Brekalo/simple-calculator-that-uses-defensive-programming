@@ -52,3 +52,5 @@
 2 + 2 = 4
 5 + 5 = 10
 5 + 5 = 10
+3 / 0 = Error: Incorrect entry! Cannot be divided by zero.
+
