@@ -1,4 +1,4 @@
-# _Project Name:_ Simple calculator that uses defensive programming
+# Simple calculator that uses defensive programming
 
 > **Table of Contents:**
 > * Project description
@@ -7,9 +7,6 @@
 
 #### **Project description:**
 The program contains several functions, it is a basic framework for a simple calculator program that can perform arithmetic equations interactively and read equations from a file, displaying the results and storing them in a file named equations.txt. It demonstrates the use of functions, exception handling, file input/output operations, and user input validation.
-
-#### **Project description:**
-The program contains several functions, a basic framework for a simple calculator program that can perform arithmetic equations interactively and read equations from a file, displaying the results and storing them in a file named equations.txt. It demonstrates the use of functions, exception handling, file input/output operations, and user input validation.
 
 #### **Code description:**
 1. The code begins by importing the os module, which provides functions for interacting with the operating system.
